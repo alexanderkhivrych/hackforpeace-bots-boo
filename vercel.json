@@ -11,5 +11,15 @@
             "src": "/(.*)",
             "dest": "/"
         }
-    ]
-  }
+    ],
+    "headers": [
+        {
+          "source": "/api/(.*)",
+          "headers": [
+            { "key": "Access-Control-Allow-Credentials", "value": "false" },
+            { "key": "Access-Control-Allow-Origin", "value": "*" },
+          ]
+        }
+      ]
+    }
+}
