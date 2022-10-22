@@ -39,4 +39,4 @@ function expressApp(functionName) {
   return app
 }
 
-module.exports.default = expressApp;
+module.exports = expressApp;
