@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const getMatchScoresByUserNames = require("./server/getMatchScoresByUserNames");
 
 /**
  * GET product list.
@@ -7,15 +8,11 @@ const router = express.Router();
  * @return product list | empty.
  */
 router.get("/", async (req, res) => {
-  try {
-    res.json({
-      status: 200,
-      message: "Get data has successfully",
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send("Server error");
-  }
+  const exampleBulkUserData = ["@SVecerinka", "@sasha_khivrych"];
+  const botometerResults = await getMatchScoresByUserNames(exampleBulkUserData);
+
+
+ return res.json(botometerResults)
 });
 
 module.exports = router;
