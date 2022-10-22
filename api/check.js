@@ -5,10 +5,14 @@ const DataLoader = require('dataloader')
 
 const loader = new DataLoader(usernames => getMatchScoresByUserNames(usernames))
 router.get("/", async (req, res) => {
-  const exampleBulkUserData = ["@SVecerinka", "@sasha_khivrych"];
-  const botometerResults = await loader.loadMany(exampleBulkUserData)
+  if(!req.query.usernames) {
+    res.status(400);
+    return res.send('usernames no specified');
+  }
+  const usernames = req.query.usernames.split(',').map((u) => `@${u}`);
+  const botometerResults = await loader.loadMany(usernames)
 
- return res.json(botometerResults)
+  return res.send(botometerResults)
 });
 
 module.exports = router;

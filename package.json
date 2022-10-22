@@ -4,7 +4,7 @@
   "description": "Bots boo",
   "main": "index.js",
   "scripts": {
-    "start:server": "node index.js"
+    "start:server": "nodemon index.js"
   },
   "engines": {
     "node": ">=v10.22.1"
@@ -30,6 +30,6 @@
     "serverless-http": "^1.6.0"
   },
   "devDependencies": {
-    "netlify-lambda": "^2.0.15"
+    "nodemon": "^2.0.20"
   }
 }
