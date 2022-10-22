@@ -1,0 +1,22 @@
+{
+  "name": "hackforpeace-bots-boo",
+  "version": "1.0.0",
+  "description": "Bots boo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexanderkhivrych/hackforpeace-bots-boo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexanderkhivrych/hackforpeace-bots-boo/issues"
+  },
+  "homepage": "https://github.com/alexanderkhivrych/hackforpeace-bots-boo#readme",
+  "dependencies": {
+    "axios": "^1.1.3"
+  }
+}
