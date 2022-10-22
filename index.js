@@ -12,7 +12,7 @@ const functionName = 'botsboo'
 // const app = expressApp(functionName)
 
 // Export lambda handler
-app.use("/api/check", checkUser );
+app.use("/api/check", cors({  origin: "*" }), checkUser );
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
