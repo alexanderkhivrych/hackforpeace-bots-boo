@@ -1,16 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const getMatchScoresByUserNames = require("./utils/getMatchScoresByUserNames");
+const DataLoader = require('dataloader')
 
-/**
- * GET product list.
- *
- * @return product list | empty.
- */
+const loader = new DataLoader(usernames => getMatchScoresByUserNames(usernames))
 router.get("/", async (req, res) => {
   const exampleBulkUserData = ["@SVecerinka", "@sasha_khivrych"];
-  const botometerResults = await getMatchScoresByUserNames(exampleBulkUserData);
-
+  const botometerResults = await loader.loadMany(exampleBulkUserData)
 
  return res.json(botometerResults)
 });
