@@ -1,19 +1,19 @@
-const DataLoader = require('dataloader')
-const getMatchScoresByUserNames = require("./server/getMatchScoresByUserNames");
+const express = require("express");
+const app = express();
+const checkUser = require("./api/check");
+/* example using https://github.com/dougmoscrop/serverless-http */
+// const expressApp = require('./server/app');
 
-const loader = new DataLoader(usernames => getMatchScoresByUserNames(usernames))
-const exampleBulkUserData = ["@SVecerinka", "@sasha_khivrych"];
+// We need to define our function name for express routes to set the correct base path
+const functionName = 'botsboo'
 
-const run = async () => {
-  const botometerResults = await loader.loadMany(exampleBulkUserData)
+// Initialize express app
+// const app = expressApp(functionName)
 
-  // console.log(botometerResults);
-}
+// Export lambda handler
+app.use("/api/check", checkUser );
 
-(async () => {
-  for (i = 1; i < 4; i++) {
-    console.time(`time taken for run ${i}`)
-    await run()
-    console.timeEnd(`time taken for run ${i}`)
-  }
-})()
+
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
