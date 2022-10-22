@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors')
 const app = express();
 const checkUser = require("./api/check");
 /* example using https://github.com/dougmoscrop/serverless-http */
@@ -11,7 +12,7 @@ const functionName = 'botsboo'
 // const app = expressApp(functionName)
 
 // Export lambda handler
-app.use("/api/check", checkUser );
+app.use("/api/check", cors({ credentials: false, origin: false }), checkUser );
 
 
 const PORT = process.env.PORT || 8080;
