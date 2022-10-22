@@ -32,7 +32,7 @@
     "babel-loader": "^8.2.5",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-preset-env": "^1.7.0",
-    "netlify-lambda": "^0.4.0"
+    "netlify-lambda": "^2.0.15"
   },
   "proxy": {
     "/.netlify/functions": {
