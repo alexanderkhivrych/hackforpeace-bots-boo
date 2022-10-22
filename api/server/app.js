@@ -8,7 +8,7 @@ const getMatchScoresByUserNames = require("./getMatchScoresByUserNames");
 
 
 /* My express App */
-function expressApp(functionName) {
+ function expressApp(functionName) {
   const app = express()
   const router = express.Router()
 
@@ -19,7 +19,7 @@ function expressApp(functionName) {
   const routerBasePath = process.env.NODE_ENV !== 'production' ? `/${functionName}` : `/.netlify/functions/${functionName}/`
 
 
-  app.get('/users', async (req, res) => {
+  router.get('/users', async (req, res) => {
     const exampleBulkUserData = ["@SVecerinka", "@sasha_khivrych"];
      const botometerResults = await getMatchScoresByUserNames(exampleBulkUserData);
 
@@ -38,5 +38,6 @@ function expressApp(functionName) {
 
   return app
 }
+
 
 module.exports = expressApp;
