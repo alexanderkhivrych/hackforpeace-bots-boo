@@ -19,7 +19,7 @@ const getMatchScoresByUserNames = require("./getMatchScoresByUserNames");
   const routerBasePath = process.env.NODE_ENV !== 'production' ? `/${functionName}` : `/.netlify/functions/${functionName}/`
 
 
-  router.get('/check/users', async (req, res) => {
+  router.get('/users', async (req, res) => {
     const exampleBulkUserData = ["@SVecerinka", "@sasha_khivrych"];
      const botometerResults = await getMatchScoresByUserNames(exampleBulkUserData);
 
