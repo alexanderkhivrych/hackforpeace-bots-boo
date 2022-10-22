@@ -20,11 +20,11 @@ function expressApp(functionName) {
 
 
   router.get('/users', async (req, res) => {
-    const exampleBulkUserData = ["@SVecerinka", "@sasha_khivrych"];
-     const botometerResults = await getMatchScoresByUserNames(exampleBulkUserData);
+    // const exampleBulkUserData = ["@SVecerinka", "@sasha_khivrych"];
+    //  const botometerResults = await getMatchScoresByUserNames(exampleBulkUserData);
 
 
-    res.json(botometerResults)
+    res.json([])
   })
 
 
