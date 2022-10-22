@@ -8,13 +8,14 @@ const botometer = new Botometer({
   rapidApiKey: "82dbbc8ae6msh227f257d810b049p15dec8jsnee0be1a5dddb",
   supressLogs: false, // Not required. Defaults to true
   usePro: true,
+  returnTwitterData: false,
 });
 
 
 async function run() {
-  const results = await botometer.getScores(["@sasha_khivrych"]);
+  const results = await botometer.getScores(["@SVecerinka", "@sasha_khivrych"]);
 
-  console.log(results);
+  console.log(JSON.stringify(results));
 }
 
 run();
