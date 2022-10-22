@@ -1,10 +1,10 @@
 /* Express App */
-const express = reqiure("express");
-const cors = reqiure("cors");
-const bodyParser = reqiure("body-parser");
-const compression = reqiure("compression");
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const compression = require("compression");
 
-const getMatchScoresByUserNames = reqiure("./getMatchScoresByUserNames");
+const getMatchScoresByUserNames = require("./getMatchScoresByUserNames");
 
 
 /* My express App */
