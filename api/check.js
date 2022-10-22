@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const getMatchScoresByUserNames = require("./server/getMatchScoresByUserNames");
+const getMatchScoresByUserNames = require("./utils/getMatchScoresByUserNames");
 
 /**
  * GET product list.
