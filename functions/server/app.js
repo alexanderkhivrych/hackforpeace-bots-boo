@@ -3,6 +3,8 @@ import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import compression from 'compression'
+import getMatchScoresByUserNames from "./getMatchScoresByUserNames";
+
 
 /* My express App */
 export default function expressApp(functionName) {
@@ -16,17 +18,12 @@ export default function expressApp(functionName) {
   const routerBasePath = process.env.NODE_ENV !== 'production' ? `/${functionName}` : `/.netlify/functions/${functionName}/`
 
 
-  router.get('/users', (req, res) => {
-    res.json({
-      users: [
-        {
-          name: 'steve',
-        },
-        {
-          name: 'joe',
-        },
-      ],
-    })
+  router.get('/check/users', async (req, res) => {
+    const exampleBulkUserData = ["@SVecerinka", "@sasha_khivrych"];
+     const botometerResults = await getMatchScoresByUserNames(exampleBulkUserData);
+
+
+    res.json(botometerResults)
   })
 
 
