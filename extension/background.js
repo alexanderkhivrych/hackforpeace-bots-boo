@@ -23,6 +23,7 @@ function extensionScript() {
     color: white;
     font-size: 16px;
     padding: 8px;
+    opacity: 1;
   `;
 
   const test_user = {
@@ -55,7 +56,7 @@ function extensionScript() {
   function fetchData(userName) {
     return new Promise((resolve) => {
       const item = JSON.parse(localStorage.getItem(`boobot_${userName}`) || null);
-      console.log(`user ${userName} in localstorage eq ${JSON.stringify(item)}`);
+      // console.log(`user ${userName} in localstorage eq ${JSON.stringify(item)}`);
 
       if (item) {
         resolve(item);
@@ -85,11 +86,14 @@ function extensionScript() {
 
   function getUsers() {
     setTimeout(() => {
-      try {
-        document.querySelectorAll('a[role="link"] span').forEach((item) => {
-          const content = item.innerHTML;
+      document.querySelectorAll('a[role="link"] span').forEach((item) => {
+        const content = item.innerHTML;
 
-          if (content && content[0] === "@" && !item.getAttribute("boo_bot")) {
+        try {
+          const isReplyContent = item.parentNode.parentNode.parentNode.innerHTML;
+          const isReply = isReplyContent && isReplyContent.indexOf("Replying to") !== -1;
+
+          if (content && content[0] === "@" && !item.getAttribute("boo_bot") && !isReply) {
             item.setAttribute("boo_bot", 1);
             item.innerHTML = content + " loading...";
 
@@ -112,19 +116,50 @@ function extensionScript() {
                   parent = parent.parentNode;
                 }
 
-                let blurredElement = parent.children[1];
-                blurredElement.style.filter = "blur(4px)";
+                if (parent.children.length === 1) {
+                  parent = parent.parentNode.parentNode;
+                }
+
+                parent.lastChild.style.filter = "blur(4px)";
 
                 parent.innerHTML = parent.innerHTML + `<button style="${buttonStyles}">I want to see it</button>`;
 
-                let buttonElement = parent.children[2];
+                let buttonElement = parent.lastChild;
                 buttonElement.addEventListener(
                   "click",
                   (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  },
+                  true
+                );
+
+                buttonElement.addEventListener(
+                  "mousedown",
+                  (e) => {
+                    e.preventDefault();
                     e.stopPropagation();
 
-                    buttonElement.parentNode.children[1].style.filter = "blur(0)";
-                    buttonElement.style.display = "none";
+                    const parentNode = buttonElement.parentNode;
+                    const elLength = parentNode.children.length;
+
+                    parentNode.children[elLength - 2].style.filter = "blur(0)";
+                    buttonElement.style.opacity = "0";
+                  },
+                  true
+                );
+
+                buttonElement.addEventListener(
+                  "mouseup",
+                  (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const parentNode = buttonElement.parentNode;
+                    const elLength = parentNode.children.length;
+
+                    parentNode.children[elLength - 2].style.filter = "blur(4px)";
+                    buttonElement.style.opacity = "1";
                   },
                   true
                 );
@@ -133,15 +168,15 @@ function extensionScript() {
               }
             });
           }
-        });
-      } catch (err) {
-        item.setAttribute("boo_bot", "");
-        item.innerHTML = content;
+        } catch (err) {
+          console.log(err);
 
-        console.log(err);
-      } finally {
-        getUsers();
-      }
+          item.setAttribute("boo_bot", "");
+          item.innerHTML = content;
+        }
+      });
+
+      getUsers();
     }, 500);
   }
 
