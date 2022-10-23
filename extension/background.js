@@ -107,10 +107,10 @@ function extensionScript() {
                 let label = "This is a bot!";
                 let color = "red";
                 if (score < 3) {
-                  label = "Probably bot";
+                  label = "Suspicious";
                   color = "#8e8e00";
                 } else if (score < 4) {
-                  label = "Most likely bot";
+                  label = "Likely bot";
                   color = "#ab6f00";
                 }
 
