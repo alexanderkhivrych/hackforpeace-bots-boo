@@ -53,11 +53,20 @@ function extensionScript() {
     },
   };
 
+  const excludedUserNames = ['ZelenskyyUa', 'Podolyak_M'];
+
   function fetchData(userName) {
     return new Promise((resolve) => {
       const item = JSON.parse(localStorage.getItem(`boobot_${userName}`) || null);
       // console.log(`user ${userName} in localstorage eq ${JSON.stringify(item)}`);
 
+      if(excludedUserNames.includes(userName)){
+        resolve({
+          display_scores: {
+            universal: 0,
+          },
+        })
+      }
       if (item) {
         resolve(item);
       } else if (!hash[userName]) {
