@@ -99,14 +99,18 @@ function extensionScript() {
 
             console.log(`detected user ${content}`);
             fetchData(content.substr(1)).then((user) => {
-              if (user.display_scores.universal.overall > 2) {
+              const { astroturf, fake_follower, financial, self_declared, spammer } = user.display_scores.universal;
+
+              const score = Math.max(astroturf, fake_follower, financial, self_declared, spammer);
+
+              if (score > 2) {
                 let label = "This is a bot!";
                 let color = "red";
-                if (user.display_scores.universal.overall < 3) {
-                  label = "Most likely bot";
-                  color = "#8e8e00";
-                } else if (user.display_scores.universal.overall < 4) {
+                if (score < 3) {
                   label = "Probably bot";
+                  color = "#8e8e00";
+                } else if (score < 4) {
+                  label = "Most likely bot";
                   color = "#ab6f00";
                 }
 
