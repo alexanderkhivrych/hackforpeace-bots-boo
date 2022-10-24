@@ -1,4 +1,4 @@
-# hacktopeace-bots-boo
+# hackforpeace-bots-boo
 Bots boo 
 
 ## API
